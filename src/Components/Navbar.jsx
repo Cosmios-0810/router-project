@@ -1,7 +1,13 @@
 import { NavLink } from 'react-router';
 import logo from '../Assets/turuncusiyah.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser } from '../features/authSlice';
 
 const Navbar = () => {
+
+  const { login } = useSelector((state) => state.auth )
+  const dispatch = useDispatch()
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
@@ -28,7 +34,15 @@ const Navbar = () => {
               <NavLink className={'nav-link'}  to={'/people'}>People</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={'nav-link'}  to={'/login'}>Login</NavLink>
+              {
+                login ? (
+                  <div className='nav-link'  onClick={() => {
+                    dispatch(deleteUser())
+                  }} >Logout</div>
+                ) : (
+                  <NavLink className={'nav-link'}  to={'/login'}>Login</NavLink>
+                )
+              }
             </li>
             
           </ul>

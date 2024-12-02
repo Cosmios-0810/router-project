@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { setUser } from "../features/authSlice";
 
 const Login = () => {
 
@@ -8,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const formStyle = {
     margin: "auto",
@@ -15,12 +18,17 @@ const Login = () => {
     marginTop: "3rem"
   }
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log(name)
-    console.log(email)
-    console.log(password)
+    const user = {
+      name,
+      email,
+      password
+    }
+
+    dispatch(setUser(user))
 
     navigate("/")
 
