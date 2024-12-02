@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import NotFound from "./NotFound";
 
@@ -15,7 +15,7 @@ const PersonDetail = () => {
 
   console.log(id);
 
-  const getPerson = async () => {
+  const getPerson = async (id) => {
     try {
 
       const response = await axios.get(`https://reqres.in/api/users/${id}`)
@@ -34,8 +34,8 @@ const PersonDetail = () => {
 
 
   useEffect(() => {
-      getPerson()
-  }, [])
+      getPerson(id)
+  }, [id])
 
 
 
